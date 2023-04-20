@@ -1,37 +1,45 @@
-import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { useState } from 'react/cjs/react.development';
-import styled from 'styled-components';
-import Wrap from '../components/Wrap';
-function Detail() {
-    const { id } = useParams(); // url의 상세 정보
+import { useEffect, useState } from 'react';
+import Movie from '../components/Movie';
 
-    const [detail, setDetail] = useState([]);
+function Home({ genre }) {
+    //state
+    const [loading, setLoading] = useState(true);
+    const [movies, setMovies] = useState([]);
 
-    const getMovie = async () => {
+    // function
+    const getMovies = async () => {
         const json = await (
-            await fetch(`https://yts.mx/api/v2/movie_details.json?movie_id=${id}`)
+            await fetch(`https://yts.mx/api/v2/list_movies.json?genre=${genre}&sort_by=download_count`)
         ).json();
-        setDetail(json.data.movie);
+        setMovies(json.data.movies);
+        setLoading(false);
     };
-    console.log(detail);
 
     // useEffect
     useEffect(() => {
-        getMovie();
+        getMovies();
     }, []);
 
-    //return
     return (
-        <Wrap
-            background={detail.background_image_original}
-            image={detail.large_cover_image}
-            title={detail.title}
-            intro={detail.description_intro}
-            genre={detail.genres}
-            runtime={detail.runtime}
-            year={detail.year}
-        />
+        <>
+            {loading ? (
+                <h1>Loading..</h1>
+            ) : (
+                <div className={`${genre} genre`}>
+                    {movies.map((movie) => (
+                        <Movie
+                            key={movie.id}
+                            id={movie.id}
+                            coverImg={movie.medium_cover_image}
+                            title={movie.title}
+                            summary={movie.summary}
+                            genres={movie.genres}
+                        />
+                    ))}
+                </div>
+            )}
+        </>
     );
 }
-export default Detail;
+
+export default Home;

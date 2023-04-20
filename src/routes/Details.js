@@ -1,11 +1,10 @@
-import {useEffect} from 'react';
-import {useParams} from 'react-router-dom';
-import {useState} from 'react/cjs/react.development';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { useState } from 'react/cjs/react.development';
 import styled from 'styled-components';
 import Wrap from '../components/Wrap';
-
 function Detail() {
-    const {id} = useParams(); // url의 상세 정보
+    const { id } = useParams(); // url의 상세 정보
 
     const [detail, setDetail] = useState([]);
 
@@ -35,5 +34,4 @@ function Detail() {
         />
     );
 }
-
 export default Detail;

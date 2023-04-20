@@ -1,6 +1,6 @@
 import './style.scss';
-import {useEffect, useState} from 'react';
-import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Header from './components/Header.js';
 import Home from './routes/Home.js';
 import Genre from './routes/Genre.js';
@@ -13,14 +13,15 @@ function App() {
     // return
     return (
         <div>
-            <Header/>
+            <Header />
+
             <Switch>
                 {genres.map((genre, index) => {
                     return (
                         <Route path={`/movie/${genre}`}>
                             <section>
-                                <div className="inner">
-                                    <Genre key={index} genre={genre}/>
+                                <div class='inner'>
+                                    <Genre key={index} genre={genre} />
                                 </div>
                             </section>
                         </Route>
@@ -28,12 +29,12 @@ function App() {
                 })}
 
                 <Route path='/movie/:id'>
-                    <Detail/>
+                    <Detail />
                 </Route>
 
                 <Route path='/'>
                     <section>
-                        <Home/>
+                        <Home />
                     </section>
                 </Route>
             </Switch>

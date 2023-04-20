@@ -1,7 +1,7 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import Movie from '../components/MainMovie';
 
-function Home({genre}) {
+function Home({ genre }) {
     //state
     const [loading, setLoading] = useState(true);
     const [movies, setMovies] = useState([]);
